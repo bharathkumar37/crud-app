@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>S3 CRUD App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Upload Files to S3</h1>
+    <form method="post" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Files in Bucket:</h2>
+    <ul>
+        {% for file in files %}
+            <li>
+                {{ file.Key }} 
+                <a href="/delete/{{ file.Key }}" onclick="return confirm('Delete this file?')">[Delete]</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
